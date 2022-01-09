@@ -1,3 +1,5 @@
+import { createActionButton, displayPetStats } from './util-functions/utils';
+
 import VirtualPet from './virtual-pet';
 
 const myPetsDiv = document.querySelector('#myPets');
@@ -21,19 +23,15 @@ function addAPet() {
 
     const createdPetSection = document.createElement('section');
     const petInfoPara = document.createElement('p');
-    petInfoPara.innerText = 'Name: ' + createdPet.name +
-      ' Description: ' + createdPet.desc + ' Hunger: ' + createdPet.hunger +
-      ' Thirst: ' + createdPet.thirst;
+
+    displayPetStats(petInfoPara, createdPet);
 
     const feedBtn = document.createElement('button');
-    feedBtn.innerText = 'feed';
-
     const waterBtn = document.createElement('button');
-    waterBtn.innerText = 'water';
+    createActionButton(createdPetSection, feedBtn, 'feed');
+    createActionButton(createdPetSection, waterBtn, 'water');
 
     createdPetSection.appendChild(petInfoPara);
-    createdPetSection.appendChild(feedBtn);
-    createdPetSection.appendChild(waterBtn);
 
     myPetsDiv.appendChild(createdPetSection);
 
@@ -42,16 +40,12 @@ function addAPet() {
       if (createdPet.thirst >= 80) {
         alert(createdPet.name + ' is thirsty!');
       }
-      petInfoPara.innerText = 'Name: ' + createdPet.name +
-        ' Description: ' + createdPet.desc + ' Hunger: ' + createdPet.hunger +
-        ' Thirst: ' + createdPet.thirst;
+      displayPetStats(petInfoPara, createdPet);
     });
 
     waterBtn.addEventListener('click', () => {
       createdPet.water();
-      petInfoPara.innerText = 'Name: ' + createdPet.name +
-        ' Description: ' + createdPet.desc + ' Hunger: ' + createdPet.hunger +
-        ' Thirst: ' + createdPet.thirst;
+      displayPetStats(petInfoPara, createdPet);
     });
 
   });
